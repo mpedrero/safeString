@@ -24,7 +24,7 @@ int main(void)
     printf("Length of the copied string: \"%ld\"\n", strlen(str10));
     printf("\n");
 
-    printf("Return value for concatenating \"%s\" and \"%s\" into a smaller string of size %ld: %d\n", str1, str2, sizeof(str10), safeStrCat(str10, str2, sizeof(str10)));
+    printf("Return value for concatenating \"%s\" and \"%s\" into a smaller string of size %d: %d\n", str1, str2, 10, safeStrCat(str10, str2, 10));
     printf("Value of the copied string: \"%s\"\n", str10);
     printf("Length of the copied string: \"%ld\"\n", strlen(str10));
     printf("\n");
