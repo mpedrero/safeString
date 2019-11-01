@@ -6,7 +6,7 @@
 #define SAFESTRING_TRUE 1
 #define SAFESTRING_FALSE 0
 
-#define STR_CLEAR(str) do { strClear(str, sizeof(str)); } while(0)
+#define STR_CLEAR(str) ({ strClear(str, sizeof(str)); })
 #define IS_STR(str) (isStr(str, sizeof(str)))
 #define IS_EQUAL(str1, str2) \
 ({                                      \
@@ -40,13 +40,13 @@
 
 
 /* Fill str with zeros, thus making a string of length 0 */
-void strClear(char* str, int size){
+static inline void strClear(char* str, int size){
     memset(str, '\0', size);
 }
 
 
 /* Return 1 if a is a string, or 0 otherwise */
-int isStr(char* str, int size)
+static inline int isStr(char* str, int size)
 {
     for(int i=0;i<size;i++){
         if(str[i] == '\0'){
@@ -58,7 +58,7 @@ int isStr(char* str, int size)
 
 
 /* Return 1 if str1 is equal to str2, or 0 otherwise */
-int isEqual(char* str1, char* str2){
+static inline int isEqual(char* str1, char* str2){
     if(strcmp(str1, str2) == 0){
         return SAFESTRING_TRUE;
     }
@@ -68,7 +68,7 @@ int isEqual(char* str1, char* str2){
 
 /* Copy the maximum possible characters of src string into dest
  * Returns 1 if the entire src string has been copied, or 0 otherwise*/
-int safeStrCpy(char* dest, char* src, int size_dest){
+static inline int safeStrCpy(char* dest, char* src, int size_dest){
     size_dest -= 1;
     strncpy(dest, src, size_dest);
 
@@ -81,7 +81,7 @@ int safeStrCpy(char* dest, char* src, int size_dest){
 
 /* Concatenate the maximum possible characters of src string into dest
  * Returns 1 if the entire src string has been concatenated, or 0 otherwise*/
-int safeStrCat(char* dest, char* src, int size_dest){
+static inline int safeStrCat(char* dest, char* src, int size_dest){
     size_dest -= 1;
     int chars_left = size_dest - strlen(dest);
 

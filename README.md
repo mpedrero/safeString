@@ -7,7 +7,7 @@ contains equivalent macros that provide a simpler interface.
 Include `safeString.h` in your code. That's it.
 
 All functions and macros return 1 in case of a successful execution, or 0
-otherwise. Thus, it is easy to test whether the operation has been done as
+otherwise (except `strClear`). Thus, it is easy to test whether the operation has been done as
 intended.
 
 # Functions
@@ -22,11 +22,11 @@ array. Also note that the size of a dynamic array _can not_ be obtained by using
   `size`. Returns 0 otherwise.
 * `int isEqual(char* str1, char* str2)`: Returns 1 if `str1` is equal to `str2`,
   or 0 otherwise. Both `str1` and `str2` _must_ be valid strings.
-* `int safeStrCpy(char* dest, char* src, int size_dest)`: Copy the maximum
-  possible characters of `src` string into `dest`. Return 1 if _the entire_
+* `int safeStrCpy(char* dest, char* src, int size_dest)`: Copies the maximum
+  possible characters of `src` string into `dest`. Returns 1 if _the entire_
   `src` string has been copied, or 0 otherwise. `src` _must_ be a valid string.
-* `int safeStrCat(char* dest, char* src, int size_dest)`: Concatenate the
-  maximum possible characters of `src` string after `dest` string. Return 1 if
+* `int safeStrCat(char* dest, char* src, int size_dest)`: Concatenates the
+  maximum possible characters of `src` string after `dest` string. Returns 1 if
   _the entire_ `src` string has been concatenated, or 0 otherwise. Both `src`
   and `dest` _must_ be valid strings.
 
@@ -45,3 +45,30 @@ interface for the functions above without the need of size information.
 
 The only requirement for safeString is `string.h`, which should be already
 installed of most C environments.
+
+# Example of use
+A more comprehensive code can be found on `test/example.c`
+
+```c
+#include "safeString.h"
+#include <stdio.h>
+
+int main(void)
+{
+    char str1[] = "Hello";
+    char str2[] = ", world";
+    char small[10];
+    char large[100];
+
+    STR_CLEAR(small);
+    SAFE_STR_CAT(small, str1);
+    SAFE_STR_CAT(small, str2);
+
+    SAFE_STR_CPY(large, str1);
+    SAFE_STR_CAT(large, str2);
+
+    printf("small: %s\nlarge: %s\n", small, large);
+
+    return 0;
+}
+```
