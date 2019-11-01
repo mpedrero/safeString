@@ -10,10 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: compile tests
-      run: gcc -o test/testSafeString.c -o tests
+      run: gcc test/testSafeString.c -o tests
   
   run:
-    if: success()
+    if: success(build)
     runs-on: ubuntu-latest
     steps:
       - name: run tests
