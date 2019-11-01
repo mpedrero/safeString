@@ -13,7 +13,7 @@ jobs:
       run: gcc test/testSafeString.c -o tests
   
   run:
-    if: success(build)
+    if: success()
     runs-on: ubuntu-latest
     steps:
       - name: run tests
