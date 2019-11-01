@@ -1,3 +1,5 @@
+![](https://github.com/mpedrero/safeString/workflows/CI%20Unit%20Tests/badge.svg)
+
 # safeString
 _safeString_ is a small header which comprises several functions intended to
 perform common operations with C strings in an easier and safer way. It also
