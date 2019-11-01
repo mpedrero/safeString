@@ -14,7 +14,7 @@
     if (IS_STR(str1) && IS_STR(str2))   \
         ret = isEqual(str1, str2);      \
     else                                \
-        ret = 0;                        \
+        ret = SAFESTRING_FALSE;         \
     (ret);                              \
 })
 
@@ -24,7 +24,7 @@
     if (IS_STR(src))                               \
         ret = safeStrCpy(dest, src, sizeof(dest)); \
     else                                           \
-        ret = 0;                                   \
+        ret = SAFESTRING_FALSE;                    \
     (ret);                                         \
 })
 
@@ -34,7 +34,7 @@
     if (IS_STR(dest) && IS_STR(src))               \
         ret = safeStrCat(dest, src, sizeof(dest)); \
     else                                           \
-        ret = 0;                                   \
+        ret = SAFESTRING_FALSE;                    \
     (ret);                                         \
 })
 
