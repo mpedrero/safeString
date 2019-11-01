@@ -9,7 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: compile and run test suite
-      run:  gcc test/testSafeString.c -o tests
-            ./tests
+      run:  |
+        gcc test/testSafeString.c -o tests
+        ./tests
 
         
