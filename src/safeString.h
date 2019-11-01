@@ -7,7 +7,7 @@
 #define SAFESTRING_FALSE 0
 
 #define STR_CLEAR(str) ({ strClear(str, sizeof(str)); })
-#define IS_STR(str) (isStr(str, sizeof(str)))
+#define IS_STR(str) ({ isStr(str, sizeof(str)); })
 #define IS_EQUAL(str1, str2) \
 ({                                      \
     int ret;                            \
