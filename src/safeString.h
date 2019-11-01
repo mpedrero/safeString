@@ -38,6 +38,8 @@
     (ret);                                         \
 })
 
+#define SAFE_STR_LEN(str) ({ safeStrLen(str, sizeof(str)); })
+
 
 /* Fill str with zeros, thus making a string of length 0 */
 static inline void strClear(char* str, int size){
@@ -45,7 +47,7 @@ static inline void strClear(char* str, int size){
 }
 
 
-/* Return 1 if a is a string, or 0 otherwise */
+/* Return 1 if str is a string, or 0 otherwise */
 static inline int isStr(char* str, int size)
 {
     for(int i=0;i<size;i++){
@@ -66,8 +68,8 @@ static inline int isEqual(char* str1, char* str2){
 }
 
 
-/* Copy the maximum possible characters of src string into dest
- * Returns 1 if the entire src string has been copied, or 0 otherwise*/
+/* Copy the maximum possible characters of src string into dest.
+ * Return 1 if the entire src string has been copied, or 0 otherwise */
 static inline int safeStrCpy(char* dest, char* src, int size_dest){
     size_dest -= 1;
     strncpy(dest, src, size_dest);
@@ -79,8 +81,8 @@ static inline int safeStrCpy(char* dest, char* src, int size_dest){
 }
 
 
-/* Concatenate the maximum possible characters of src string into dest
- * Returns 1 if the entire src string has been concatenated, or 0 otherwise*/
+/* Concatenate the maximum possible characters of src string into dest.
+ * Return 1 if the entire src string has been concatenated, or 0 otherwise */
 static inline int safeStrCat(char* dest, char* src, int size_dest){
     size_dest -= 1;
     int chars_left = size_dest - strlen(dest);
@@ -91,6 +93,15 @@ static inline int safeStrCat(char* dest, char* src, int size_dest){
         return SAFESTRING_FALSE;
     }
     return SAFESTRING_TRUE;
+}
+
+/* Return the length of a string. Return 0 if the array is not a string */
+static inline int safeStrLen(char* str, int size)
+{
+    if(isStr(str, size)){
+        return strlen(str);
+    }
+    return SAFESTRING_FALSE;
 }
 
 #endif

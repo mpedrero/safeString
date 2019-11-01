@@ -26,6 +26,10 @@ int main(void)
     assert(isEqual(str1, str1));
     assert(!isEqual(str1, str2));
 
+    /* safeStrLen tests */
+    assert(safeStrLen(str1, sizeof(str1)) == strlen(str1));
+    assert(safeStrLen(notStr, sizeof(notStr)) == 0);
+
     /* safeStrCpy tests */
     assert(safeStrCpy(strGoodDest, str1, sizeof(strGoodDest)));
     assert(!safeStrCpy(strBadDest, str1, sizeof(strBadDest)));
@@ -61,6 +65,10 @@ int main(void)
     /* IS_EQUAL tests */
     assert(IS_EQUAL(str1, str1));
     assert(!IS_EQUAL(str1, str2));
+
+    /* SAFE_STR_LEN tests */
+    assert(SAFE_STR_LEN(str1) == strlen(str1));
+    assert(SAFE_STR_LEN(notStr) == 0);
 
     /* SAFE_STR_CPY tests */
     assert(SAFE_STR_CPY(strGoodDest, str1));

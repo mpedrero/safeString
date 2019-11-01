@@ -3,24 +3,22 @@
 # safeString
 _safeString_ is a small header which comprises several functions intended to
 perform common operations with C strings in an easier and safer way. It also
-contains equivalent macros that provide a simpler interface.
+contains equivalent macros that provide a simpler interface. All functions that
+involve string modification __guarantee that the result will be a valid string__
+regardless of the input string size.
 
 # How to use
 Include `safeString.h` in your code. That's it.
 
-All functions and macros return 1 in case of a successful execution, or 0
-otherwise (except `strClear`), so it is easy to test whether the operation has 
-been done as intended. 
+All functions and macros return 1 in case of a correct execution, or 0 otherwise
+(except `strClear`), so it is easy to test whether the operation has been done
+as intended. 
 
-Also, `strClear`, `safeStrCpy` and `safeStrCat` 
-__guarantee that the result will be a valid string__, regardless of the 
-destination string size.
+Note that `char*` input parameters must _not_ contain an uninitialized pointer,
+but an array. Also note that the size of a dynamic array _can not_ be obtained
+by using `sizeof()` function, so it must be set explicitly.
 
 # Functions
-
-Note that `char*` parameters must _not_ receive an uninitialized pointer, but an
-array. Also note that the size of a dynamic array _can not_ be obtained by using
-`sizeof()` function, so it must be set explicitly.
 
 * `void strClear(char* str, int size)`: Fills `str` with `\0` within `size`,
   thus making a string of length 0.
@@ -35,6 +33,8 @@ array. Also note that the size of a dynamic array _can not_ be obtained by using
   maximum possible characters of `src` string after `dest` string. Returns 1 if
   _the entire_ `src` string has been concatenated, or 0 otherwise. Both `src`
   and `dest` _must_ be valid strings.
+* `int safeStrLen(char* str, int size)`: Returns the number of characters of
+  `str` not counting the final `'\0'`. If `str` is not a string, returns 0.
 
 # Macros
 
@@ -46,6 +46,7 @@ interface for the functions above without the need of size information.
 * `IS_EQUAL(str1, str2)`
 * `SAFE_STR_CPY(dest, src)`
 * `SAFE_STR_CAT(dest, src)`
+* `SAFE_STR_LEN(str)`
 
 # Dependencies
 
