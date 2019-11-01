@@ -7,8 +7,12 @@ contains equivalent macros that provide a simpler interface.
 Include `safeString.h` in your code. That's it.
 
 All functions and macros return 1 in case of a successful execution, or 0
-otherwise (except `strClear`). Thus, it is easy to test whether the operation has been done as
-intended.
+otherwise (except `strClear`), so it is easy to test whether the operation has 
+been done as intended. 
+
+Also, `strClear`, `safeStrCpy` and `safeStrCat` 
+__guarantee that the result will be a valid string__, regardless of the 
+destination string size.
 
 # Functions
 
